@@ -22,7 +22,7 @@
 	    		{% if is_loggined %}
 	    			<a href="/profile/{{ user_id }}/"><li>Профиль</li></a>
 	    			<a href="/profile/update/"><li>Редактирование</li></a>
-	    			<a href="/profile/friends/"><li>Друзья</li></a>
+	    			<a href="/friends/{{ user_id }}/"><li>Друзья</li></a>
 	    		{% else %}
 	    			<a href="/"><li>Главная</li></a>
 	    		{% endif %}

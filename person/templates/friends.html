@@ -2,7 +2,11 @@
 {% block content %}
 	<div class="profile">
 		{% for f in friends %}
-			<div>{{ last_name }} {{ first_name }}</div>
+			<a href="/profile/{{ f.id }}">
+			<img class="friends-img" src="/uploads/avatar/{{ f.avatar }}"/>
+			<div>{{ f.last_name }} {{ f.first_name }}</div>
+		{% empty %}
+			<div>У вас нет друзей</div>
 		{% endfor %}
 	</div>
 {% endblock %}

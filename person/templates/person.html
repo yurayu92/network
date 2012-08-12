@@ -6,7 +6,7 @@
 	    </div>
 	    <div class="profile-friends">
 	    	<div class="profile-all-friends">
-	    		<div class="title">Друзья ({{ all_friends_count }})</div>
+	    		<div class="title"><a href="/friends/{{ person.id }}/">Друзья</a> ({{ all_friends_count }})</div>
 	    		<div class="some-friends">
 	    			{% for s in some_friends %}
 		    			<a href="/profile/{{ s.id }}/">
@@ -48,6 +48,9 @@
 	    </div>
 	    <div class="profile-avatar">
 	    	<img src="/uploads/avatar/{{ person.avatar }}"/>
+	    	{% if person.id != user_id %}
+	    		<div><input type="submit" value="Добавить в друзья"/></div>
+	    	{% endif %}
 	    </div><br/><br/>
 	</div>
 {% endblock %}

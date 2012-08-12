@@ -16,11 +16,11 @@ class Person:
                                          ON `u`.`id` = `f`.`users1_id` or `u`.`id` = `f`.`users2_id`\
                                          WHERE `f`.`is_active` = 1 AND `u`.`id` != %s AND \
                                          (`f`.`users1_id` = %s or `f`.`users2_id` = %s)' % (id, id, id))
-        return {'friends' : friends}
+        return friends
     
     
     def getPersonById(self, id):
-        person = self.db.fetchOne('SELECT first_name, last_name, avatar, birthday, job, email, phone\
+        person = self.db.fetchOne('SELECT id, first_name, last_name, avatar, birthday, job, email, phone\
                                    FROM users WHERE id = %s' % (id))
         return person
 
