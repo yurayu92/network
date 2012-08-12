@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="profile">
+	    <div class="profile-name">
+	    	{{ person.last_name }} {{ person.first_name }}
+	    </div>
+	    <div class="profile-friends">
+	    	<div class="profile-all-friends">
+	    		<div class="title">Друзья ({{ all_friends_count }})</div>
+	    		<div class="some-friends">
+	    			{% for s in some_friends %}
+		    			<a href="/profile/{{ s.id }}/">
+		    				<div class="my-friend">
+		    					<img src="/uploads/avatar/{{ s.avatar }}" />
+		    					<div class="profile-friend-name">
+		    						{{ s.last_name }} {{ s.first_name }}
+		    					</div>
+		    				</div>
+		    			</a>
+		    		{% endfor %}
+	    		</div>
+	    	</div>
+	    	<div class="clear"></div><br/>
+	    	<div class="profile-all-friends">
+	    		<div class="title">Друзья online (0)</div>
+	    		<div class="some-friends">
+	    		</div>
+	    	</div>
+	    	<div class="clear"></div>
+	    </div>
+	    <div class="profile-info">
+	    	<div class="block-info">
+		    	<div class="name">Дата Рождения</div>
+		    	<div>{{ person.birthday }}</div>
+		    </div>
+	    	<div class="block-info">
+		    	<div class="name">Работа</div>
+		    	<div>{{ person.job }}</div>
+		    </div>
+	    	<div class="block-info">
+		    	<div class="name">E-mail</div>
+		    	<div>{{ person.email }}</div>
+		    </div>
+	    	<div class="block-info">
+		    	<div class="name">Телефон</div>
+		    	<div>{{ person.phone }}</div>
+		    </div>
+	    </div>
+	    <div class="profile-avatar">
+	    	<img src="/uploads/avatar/{{ person.avatar }}"/>
+	    </div><br/><br/>
+	</div>
+{% endblock %}

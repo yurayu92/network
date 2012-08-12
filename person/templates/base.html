@@ -1,0 +1,35 @@
+{% csrf_token %}
+<html>
+    <head>
+		<title>Social Network</title>
+		<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    </head>
+    <body>
+    <div>
+    	<div class="log">
+    		<form action="" method="post">
+	    		{% if is_loggined %}
+	    			<input type="submit" value="logout"/>
+	    		{% else %}
+    				<input type="text" name="email"/>
+    				<input type="password" name="password"/>
+    				<input type="submit" name="login"/>
+	    		{% endif %}
+    		</form>
+    	</div>
+    	<div class="black">
+	    	<ul class="title-menu">
+	    		<a href=""><li>Главная</li></a>
+	    		<a href=""><li>Профиль</li></a>
+	    	</ul>
+    	</div>
+    	<div class="clear"></div>
+    	{% if error %}
+    		<div>Неверный E-mail или Пароль</div>
+    	{% endif %}
+    </div><br/>
+	{% block content %}
+
+	{% endblock %}
+    </body>
+</html>
