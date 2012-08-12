@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="profile">
+		{% for f in friends %}
+			<div>{{ last_name }} {{ first_name }}</div>
+		{% endfor %}
+	</div>
+{% endblock %}

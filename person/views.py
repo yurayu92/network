@@ -5,8 +5,10 @@ from django.shortcuts import render_to_response
 from md5 import md5
 
 from classes.database_class import database
+from classes.person_class import Person
 
 db = database()
+Person = Person(db)
 
 def check_auth(request):
     if request.session.get('user_id'):
@@ -17,7 +19,12 @@ def check_auth(request):
     return {'is_loggined' : is_loggined}
 
 
-def login(request):
+def login(request):    
+    if request.session.get('user_id'):
+        return HttpResponseRedirect('/profile/%s/' % (request.session['user_id']))
+    else:
+        is_loggined = False
+    
     if request.method == 'POST':
         check_user = db.fetchOne('SELECT id, password FROM users\
                                   WHERE email = "%s"' % (request.POST['email']))
@@ -28,32 +35,63 @@ def login(request):
         else:
             return render_to_response('base.html', {'error' : True})
     else:
-        return render_to_response('base.html', {'error' : False})
+        return render_to_response('base.html', 
+                                  {'error' : False}, 
+                                  context_instance = RequestContext(request, processors=[check_auth]))
             
 
+def person_update(request):
+    if request.session.get('user_id'):
+        is_loggined = True
+    else:
+        return HttpResponseRedirect('/')
+    
+    if request.method == 'POST':
+        return HttpResponseRedirect('/profile/update/')
+    
+    id = request.session['user_id']
+    person_info = Person.getPersonById(id)
+    
+    return render_to_response('person_info.html', 
+                              {'person_info' : person_info,
+                               'user_id' : id},
+                               context_instance = RequestContext(request, processors=[check_auth]))
+
+def friends(request):
+    if request.session.get('user_id'):
+        is_loggined = True
+    else:
+        return HttpResponseRedirect('/')
+    
+    id = request.session['user_id']
+    friends = Person.getFriends(id)
+    
+    return render_to_response('friends.html',
+                              {'friends' : friends,
+                               'user_id' : id},
+                               context_instance = RequestContext(request, processors=[check_auth]))
+
+
 def person(request, offset):
+    if request.session.get('user_id'):
+        is_loggined = True
+    else:
+        is_loggined = False
+        return HttpResponseRedirect('/')
+
     if request.method == 'POST':
         if request.POST.has_key('logout'):
             try:
-                del request.session['user_id']
+                request.session.pop('user_id')
             except:
                 pass
             return HttpResponseRedirect('/')
     
-    person = db.fetchOne('SELECT first_name, last_name, avatar, birthday, job, email, phone\
-                           FROM users WHERE id = %s' % (offset))
-    
-    some_friends = db.fetchMany('SELECT `u`.`id`, `u`.`first_name`,\
-                                 `u`.`last_name`, `u`.`avatar`\
-                                 FROM `users_friends` `f` INNER JOIN `users` `u`\
-                                 ON `u`.`id` = `f`.`users1_id` or `u`.`id` = `f`.`users2_id`\
-                                 WHERE `f`.`is_active` = 1 AND `u`.`id` != %s AND \
-                                 (`f`.`users1_id` = %s or `f`.`users2_id` = %s) ORDER BY RAND()' 
-                                 % (offset, offset, offset), 3)
-    
-    all_friends_count = int(db.fetchOne('SELECT FOUND_ROWS()')['FOUND_ROWS()'])
+    person_info = Person.getPersonById(offset)
+    person_friends_info = Person.fetchProfile(offset)
 
-    return render_to_response('person.html',{'person' : person,
-                                             'some_friends' : some_friends,
-                                             'all_friends_count' : all_friends_count},
+    return render_to_response('person.html',{'person' : person_info,
+                                             'some_friends' : person_friends_info['some_friends'],
+                                             'all_friends_count' : person_friends_info['count'],
+                                             'user_id' : request.session['user_id']},
                                              context_instance = RequestContext(request, processors=[check_auth]))

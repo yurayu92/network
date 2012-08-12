@@ -1,5 +1,5 @@
 # Django settings for network project.
-# encoding: utf-8
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -13,10 +13,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'network',                      # Or path to database file if using sqlite3.
-        'USER': 'network_user',                      # Not used with sqlite3.
-        'PASSWORD': 'password',                  # Not used with sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': 'itdxer',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+        'PORT': '8008',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 DEFAULT_CHARSET = 'utf-8'
@@ -48,22 +48,22 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = 'C://proj/network/uploads'
+MEDIA_ROOT = '/srv/www/network.git/uploads'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = 'http://127.0.0.1:8000/uploads/'
+MEDIA_URL = 'http://127.0.0.1:8008/uploads/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = 'C://proj/network/static'
+STATIC_ROOT = '/srv/www/network.git/static'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = 'http://127.0.0.1:8000/static/'
+STATIC_URL = 'http://127.0.0.1:8008/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = ('',

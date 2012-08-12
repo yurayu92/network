@@ -1,0 +1,24 @@
+{% extends 'update.html' %}
+	<form action="" method="post">
+	    <div>
+	        <span>Имя:</span>
+	        <input type="text" name="name" value="{{ person_info.first_name }}"/>
+	    </div>
+	    <div>
+	        <span>Фамилия:</span>
+	        <input type="text" name="name" value="{{ person_info.last_name }}"/>
+	    </div>
+	    <div>
+	        <span>E-mail:</span>
+	        <input type="text" name="name" value="{{ person_info.email }}"/>
+	    </div>
+	    <div>
+	        <span>Телефон:</span>
+	        <input type="text" name="name" value="{{ person_info.phone }}"/>
+	    </div>
+	    <div>
+	        <span>Работа:</span>
+	        <input type="text" name="name" value="{{ person_info.job }}"/>
+	    </div>
+	    <input type="submit" value="Изменить"/>
+	</form>

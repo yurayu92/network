@@ -13,7 +13,7 @@ body { background-color: #20B2AA; margin: 0; padding: 0; }
 .my-friend { width: 60px; height: 70px; border: 1px solid #008080; margin: 10px 5px; float:left; }
 .my-friend img { width: 60px; height: 70px; }
 
-.title-menu { width: 1080px; margin: 0px auto; list-style-type: none;}
+.title-menu { width: 1080px; margin: 0px auto; list-style-type: none; }
 .title-menu li { float: left; background-color: #FFCA80; color: #FFF; padding: 10px 20px; }
 .title-menu li:hover { background-color: #252525; }
 .log { float: right; background-color: #252525; width: 100%; }
@@ -21,6 +21,13 @@ body { background-color: #20B2AA; margin: 0; padding: 0; }
 .black { #background-color: #252525; width: 100%; height: 30px;}
 .left { float: left; }
 .right { float:right; }
+
+.update-menu { float: left; width: 300px; }
+.update-menu ul { list-style-type: none; }
+.update-menu a { text-decoration: none; color: black }
+
+.update-content { width: 600px; float:right; }
+.update-title { font-size: 24px; text-align:center; margin: 15px 0; }
 
 .clear { clear: both; }
 

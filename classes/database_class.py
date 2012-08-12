@@ -7,7 +7,7 @@ class database:
     def __init__(self):
         db = MySQLdb.connect(host='localhost',
                             user='root',
-                            passwd='',
+                            passwd='itdxer',
                             db='network', 
                             cursorclass=MySQLdb.cursors.DictCursor)
         self.cursor = db.cursor()

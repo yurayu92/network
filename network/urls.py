@@ -6,7 +6,9 @@ from person.views import *
 
 urlpatterns = patterns('',
     url(r'^$', login),
-    url('^profile/(\d)+/$', person),
+    url(r'^profile/(\d)+/$', person),
+    url(r'^profile/update/$', person_update),
+    url(r'^profile/friends/$', friends),
 )
 
 urlpatterns += patterns('',

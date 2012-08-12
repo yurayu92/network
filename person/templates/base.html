@@ -9,7 +9,7 @@
     	<div class="log">
     		<form action="" method="post">
 	    		{% if is_loggined %}
-	    			<input type="submit" value="logout"/>
+	    			<input type="submit" name="logout" value="logout"/>
 	    		{% else %}
     				<input type="text" name="email"/>
     				<input type="password" name="password"/>
@@ -19,8 +19,13 @@
     	</div>
     	<div class="black">
 	    	<ul class="title-menu">
-	    		<a href=""><li>Главная</li></a>
-	    		<a href=""><li>Профиль</li></a>
+	    		{% if is_loggined %}
+	    			<a href="/profile/{{ user_id }}/"><li>Профиль</li></a>
+	    			<a href="/profile/update/"><li>Редактирование</li></a>
+	    			<a href="/profile/friends/"><li>Друзья</li></a>
+	    		{% else %}
+	    			<a href="/"><li>Главная</li></a>
+	    		{% endif %}
 	    	</ul>
     	</div>
     	<div class="clear"></div>
