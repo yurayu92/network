@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     url(r'^$', login),
     url(r'^profile/(\d)+/$', person),
     url(r'^profile/update/$', person_update),
-    url(r'^profile/friends/$', friends),
+    url(r'^friends/(\d)+/$', friends),
 )
 
 urlpatterns += patterns('',

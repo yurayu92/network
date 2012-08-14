@@ -1,6 +1,7 @@
 body { background-color: #20B2AA; margin: 0; padding: 0; }
 .profile { background-color: #FFF; width: 900px; margin: 0 auto; border-radius: 10px; padding: 10px; }
 .profile-avatar img { width: 300px; }
+.profile-avatar div input { margin: 0 auto; }
 .profile-name { font-size: 20px; text-align: center; margin: 10px 0; font-weight: bold; }
 .profile-friends { float: left; width: 300px; }
 .profile-all-friends { width: 220px; margin: 10px auto; }
@@ -28,6 +29,8 @@ body { background-color: #20B2AA; margin: 0; padding: 0; }
 
 .update-content { width: 600px; float:right; }
 .update-title { font-size: 24px; text-align:center; margin: 15px 0; }
+
+.friends-img { width:250px; }
 
 .clear { clear: both; }
 

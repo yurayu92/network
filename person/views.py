@@ -57,26 +57,36 @@ def person_update(request):
                                'user_id' : id},
                                context_instance = RequestContext(request, processors=[check_auth]))
 
-def friends(request):
+def friends(request, offset):
     if request.session.get('user_id'):
         is_loggined = True
     else:
         return HttpResponseRedirect('/')
     
+    if request.method == 'POST':
+        if request.POST.has_key('logout'):
+            try:
+                request.session.pop('user_id')
+            except:
+                pass
+            return HttpResponseRedirect('/')
+        
+    not_friends = Person.getNewFriends(offset)
     id = request.session['user_id']
-    friends = Person.getFriends(id)
+    friends = Person.getFriends(offset)
     
     return render_to_response('friends.html',
                               {'friends' : friends,
-                               'user_id' : id},
+                               'user_id' : id,
+                               'not_friends' : not_friends},
                                context_instance = RequestContext(request, processors=[check_auth]))
 
 
 def person(request, offset):
     if request.session.get('user_id'):
         is_loggined = True
+        id = request.session['user_id']
     else:
-        is_loggined = False
         return HttpResponseRedirect('/')
 
     if request.method == 'POST':
@@ -86,12 +96,17 @@ def person(request, offset):
             except:
                 pass
             return HttpResponseRedirect('/')
+        elif request.POST.has_key('add-friend'):
+            Person.addFriend(offset, id)
+            
     
+
     person_info = Person.getPersonById(offset)
-    person_friends_info = Person.fetchProfile(offset)
+    person_friends_info = Person.fetchProfile(offset, id)
 
     return render_to_response('person.html',{'person' : person_info,
                                              'some_friends' : person_friends_info['some_friends'],
                                              'all_friends_count' : person_friends_info['count'],
-                                             'user_id' : request.session['user_id']},
+                                             'is_friend' : person_friends_info['is_friend'],
+                                             'user_id' : id},
                                              context_instance = RequestContext(request, processors=[check_auth]))
