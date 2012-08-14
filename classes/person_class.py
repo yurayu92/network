@@ -13,7 +13,7 @@ class Person:
         friends = self.db.fetchAll('SELECT `u`.`id`, `u`.`first_name`,\
                                      `u`.`last_name`, `u`.`avatar`\
                                      FROM `users_friends` `f` INNER JOIN `users` `u`\
-                                     ON `u`.`id` = `f`.`users2_id`\
+                                     ON `u`.`id` = `f`.`users1_id`\
                                      WHERE `f`.`is_active` = 0 AND `u`.`id` != %s AND \
                                      `f`.`users2_id` = %s' % (id, id))
         return friends

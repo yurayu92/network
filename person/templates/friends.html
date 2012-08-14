@@ -4,8 +4,12 @@
 		{% if not_friends %}
 			{% for n in not_friends %}
 				<a href="/profile/{{ n.id }}">
-				<img class="friends-img" src="/uploads/avatar/{{ n.avatar }}"/>
-				<div>{{ n.last_name }} {{ n.first_name }}</div>
+					<img class="friends-img" src="/uploads/avatar/{{ n.avatar }}"/>
+					<div>{{ n.last_name }} {{ n.first_name }}</div>
+				</a>
+				<form action="" method="post">
+					<input type="submit" name="add-to-friends" value="Подтвердить заявку"/>
+				</form>
 			{% endfor %}
 			<hr/>
 		{% endif %}
