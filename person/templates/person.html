@@ -48,9 +48,15 @@
 	    </div>
 	    <div class="profile-avatar">
 	    	<img src="/uploads/avatar/{{ person.avatar }}"/>
-	    	{% if person.id != user_id %}
-	    		<div><input type="submit" value="Добавить в друзья"/></div>
-	    	{% endif %}
+	    	<form action="" method="post">
+	    	{% if is_friend %}
+	    		<div><input type="submit" name="delete-friend" value="Удалить из друзей"/></div>
+	    	{% else %}
+		    	{% if person.id != user_id %}
+		    		<div><input type="submit" name="add-friend" value="Добавить в друзья"/></div>
+		    	{% endif %}
+		    {% endif %}
+		    </form>
 	    </div><br/><br/>
 	</div>
 {% endblock %}

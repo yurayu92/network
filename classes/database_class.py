@@ -3,6 +3,7 @@ import MySQLdb
 class database:
     
     cursor = None
+    db = None
     
     def __init__(self):
         db = MySQLdb.connect(host='localhost',
@@ -10,6 +11,7 @@ class database:
                             passwd='itdxer',
                             db='network', 
                             cursorclass=MySQLdb.cursors.DictCursor)
+        self.db = db
         self.cursor = db.cursor()
         self.cursor.execute("SET NAMES utf8")
         
@@ -28,3 +30,7 @@ class database:
     def count(self, query):
         count = self.cursor.execute(query)
         return self.cursor.rowcount
+    
+    def action(self, query):
+        self.cursor.execute(query)
+        self.db.commit()

@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 	<div class="profile">
+		{% if not_friends %}
+			{% for n in not_friends %}
+				<a href="/profile/{{ n.id }}">
+				<img class="friends-img" src="/uploads/avatar/{{ n.avatar }}"/>
+				<div>{{ n.last_name }} {{ n.first_name }}</div>
+			{% endfor %}
+			<hr/>
+		{% endif %}
+		
 		{% for f in friends %}
 			<a href="/profile/{{ f.id }}">
 			<img class="friends-img" src="/uploads/avatar/{{ f.avatar }}"/>
